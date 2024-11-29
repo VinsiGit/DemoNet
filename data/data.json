@@ -2,201 +2,321 @@
     {
     "image_id": 1,
     "image_path": "/images/image1.png",
-    "address": "Noltheniusstraat 29, 3533 SG  UTRECHT"
+    "address": "Noltheniusstraat 29, 3533 SG  UTRECHT",
+    "year": 1954,
+    "area": 126,
+    "BAG": "0344100000081447"
     },
     {
     "image_id": 2,
     "image_path": "/images/image2.png",
-    "address": "Von Weberstraat 29, 3533 EC  UTRECHT"
+    "address": "Von Weberstraat 29, 3533 EC  UTRECHT",
+    "year": 1955,
+    "area": 115,
+    "BAG": "0344100000067920"
     },
     {
     "image_id": 3,
     "image_path": "/images/image3.png",
-    "address": "Chopinstraat 42, 3533 EN  UTRECHT"
+    "address": "Chopinstraat 42, 3533 EN  UTRECHT",
+    "year": 1935,
+    "area": 110,
+    "BAG": "0344100000050569"
     },
     {
     "image_id": 4,
     "image_path": "/images/image4.png",
-    "address": "Johann Sebastian Bachstr 55, 3533 XB  UTRECHT"
+    "address": "Johann Sebastian Bachstr 55, 3533 XB  UTRECHT",
+    "year": 1919,
+    "area": 120,
+    "BAG": "0344100000039962"
     },
     {
     "image_id": 5,
     "image_path": "/images/image5.png",
-    "address": "Kweekhoeve 22, 3438 MB  NIEUWEGEIN"
+    "address": "Kweekhoeve 22, 3438 MB  NIEUWEGEIN",
+    "year": 2019,
+    "area": 276,
+    "BAG": "0356100000125385"
     },
     {
     "image_id": 6,
     "image_path": "/images/image6.png",
-    "address": "Nederhoeve 12, 3438 LH  NIEUWEGEIN"
+    "address": "Nederhoeve 12, 3438 LH  NIEUWEGEIN",
+    "year": 2006,
+    "area": 174,
+    "BAG": "0356100000083187"
     },
     {
     "image_id": 7,
     "image_path": "/images/image7.png",
-    "address": "Ina Boudier-Bakkerhove 12, 3438 PA  NIEUWEGEIN"
+    "address": "Ina Boudier-Bakkerhove 12, 3438 PA  NIEUWEGEIN",
+    "year": 1997,
+    "area": 133,
+    "BAG": "0356100000064499"
     },
     {
     "image_id": 8,
     "image_path": "/images/image8.png",
-    "address": "Bertus Aafjeshove 32, 3437 JN  NIEUWEGEIN"
+    "address": "Bertus Aafjeshove 32, 3437 JN  NIEUWEGEIN",
+    "year": 1998,
+    "area": 198,
+    "BAG": "0356100000064365"
     },
     {
     "image_id": 9,
     "image_path": "/images/image9.png",
-    "address": "Geraniumstraat 21, 3551 HA  UTRECHT"
+    "address": "Geraniumstraat 21, 3551 HA  UTRECHT",
+    "year": 1928,
+    "area": 70,
+    "BAG": "0344100000073734"
     },
     {
     "image_id": 10,
     "image_path": "/images/image10.png",
-    "address": "Robijnlaan 27, 3523 BV  UTRECHT"
+    "address": "Robijnlaan 27, 3523 BV  UTRECHT",
+    "year": 1958,
+    "area": 105,
+    "BAG": "0344100000064924"
     },
     {
     "image_id": 11,
     "image_path": "/images/image11.png",
-    "address": "Topaaslaan 16, 3523 AT  UTRECHT"
+    "address": "Topaaslaan 16, 3523 AT  UTRECHT",
+    "year": 1957,
+    "area": 90,
+    "BAG": "0344100000028091"
     },
     {
     "image_id": 12,
     "image_path": "/images/image12.png",
-    "address": "Rijnlaan 214, 3522 BX  UTRECHT"
+    "address": "Rijnlaan 214, 3522 BX  UTRECHT",
+    "year": 1931,
+    "area": 92,
+    "BAG": "0344100000022305"
     },
     {
     "image_id": 13,
     "image_path": "/images/image13.png",
-    "address": "Diezestraat 14, 3522 GZ  UTRECHT"
+    "address": "Diezestraat 14, 3522 GZ  UTRECHT",
+    "year": 1926,
+    "area": 63,
+    "BAG": "0344100000053849"
     },
     {
     "image_id": 14,
     "image_path": "/images/image14.png",
-    "address": "Maasstraat 20, 3522 TH  UTRECHT"
+    "address": "Maasstraat 20, 3522 TH  UTRECHT",
+    "year": 1979,
+    "area": 130,
+    "BAG": "0344100000081188"
     },
     {
     "image_id": 15,
     "image_path": "/images/image15.png",
-    "address": "Runstraat 8, 3522 RH  UTRECHT"
+    "address": "Runstraat 8, 3522 RH  UTRECHT",
+    "year": 1934,
+    "area": 90,
+    "BAG": "0344100000055123"
     },
     {
     "image_id": 16,
     "image_path": "/images/image16.png",
-    "address": "Noordzeestraat 41, 3522 PJ  UTRECHT"
+    "address": "Noordzeestraat 41, 3522 PJ  UTRECHT",
+    "year": 2009,
+    "area": 122,
+    "BAG": "0344100000045400"
     },
     {
     "image_id": 17,
     "image_path": "/images/image17.png",
-    "address": "Croesestraat 61, 3522 AC  UTRECHT"
+    "address": "Croesestraat 61, 3522 AC  UTRECHT",
+    "year": 1906,
+    "area": 129,
+    "BAG": "0344100000018050"
     },
     {
     "image_id": 18,
     "image_path": "/images/image18.png",
-    "address": "Abstederdijk 239, 3582 BJ  UTRECHT"
+    "address": "Abstederdijk 239, 3582 BJ  UTRECHT",
+    "year": 1877,
+    "area": 82,
+    "BAG": "0344100000005952"
     },
     {
     "image_id": 19,
     "image_path": "/images/image19.png",
-    "address": "Piet Heinstraat 15, 3582 BX  UTRECHT"
+    "address": "Piet Heinstraat 15, 3582 BX  UTRECHT",
+    "year": 1877,
+    "area": 75,
+    "BAG": "0344100000064714"
     },
     {
     "image_id": 20,
     "image_path": "/images/image20.png",
-    "address": "Aurorastraat 14, 3581 LV  UTRECHT"
+    "address": "Aurorastraat 14, 3581 LV  UTRECHT",
+    "year": 1934,
+    "area": 132,
+    "BAG": "0344100000043683"
     },
     {
     "image_id": 21,
     "image_path": "/images/image21.png",
-    "address": "Eikstraat 21, 3581 XJ  UTRECHT"
+    "address": "Eikstraat 21, 3581 XJ  UTRECHT",
+    "year": 1920,
+    "area": 63,
+    "BAG": "0344100000020425"
     },
     {
     "image_id": 22,
     "image_path": "/images/image22.png",
-    "address": "Beukstraat 22, 3581 XG  UTRECHT"
+    "address": "Beukstraat 22, 3581 XG  UTRECHT",
+    "year": 1920,
+    "area": 112,
+    "BAG": "0344100000000021"
     },
     {
     "image_id": 23,
     "image_path": "/images/image23.png",
-    "address": "Prinsenstraat 13, 3581 JR  UTRECHT"
+    "address": "Prinsenstraat 13, 3581 JR  UTRECHT",
+    "year": 1913,
+    "area": 170,
+    "BAG": "0344100000075174"
     },
     {
     "image_id": 24,
     "image_path": "/images/image24.png",
-    "address": "Poortstraat 21, 3572 HB  UTRECHT"
+    "address": "Poortstraat 21, 3572 HB  UTRECHT",
+    "year": 1881,
+    "area": 230,
+    "BAG": "0344100000026574"
     },
     {
     "image_id": 25,
     "image_path": "/images/image25.png",
-    "address": "Poortstraat 60, 3572 HL  UTRECHT"
+    "address": "Poortstraat 60, 3572 HL  UTRECHT",
+    "year": 1890,
+    "area": 164,
+    "BAG": "0344100000081895"
     },
     {
     "image_id": 26,
     "image_path": "/images/image26.png",
-    "address": "van Doesburglaan 2, 3431 GB  NIEUWEGEIN"
+    "address": "van Doesburglaan 2, 3431 GB  NIEUWEGEIN",
+    "year": 1973,
+    "area": 196,
+    "BAG": "0356100000078921"
     },
     {
     "image_id": 27,
     "image_path": "/images/image27.png",
-    "address": "Rietveldlaan 8, 3431 GD  NIEUWEGEIN"
+    "address": "Rietveldlaan 8, 3431 GD  NIEUWEGEIN",
+    "year": 1971,
+    "area": 244,
+    "BAG": "0356100000098419"
     },
     {
     "image_id": 28,
     "image_path": "/images/image28.png",
-    "address": "Mondriaanlaan 10, 3431 GA  NIEUWEGEIN"
+    "address": "Mondriaanlaan 10, 3431 GA  NIEUWEGEIN",
+    "year": 1972,
+    "area": 260,
+    "BAG": "0356100000083308"
     },
     {
     "image_id": 29,
     "image_path": "/images/image29.png",
-    "address": "Kerkveld 67, 3431 EC  NIEUWEGEIN"
+    "address": "Kerkveld 67, 3431 EC  NIEUWEGEIN",
+    "year": 1904,
+    "area": 413,
+    "BAG": "0356100000078979"
     },
     {
     "image_id": 30,
     "image_path": "/images/image30.png",
-    "address": "Woudenbergseweg 3, 3701 BA  ZEIST"
+    "address": "Woudenbergseweg 3, 3701 BA  ZEIST",
+    "year": 1900,
+    "area": 296,
+    "BAG": "0355100000720137"
     },
     {
     "image_id": 31,
     "image_path": "/images/image31.png",
-    "address": "Krullelaan 28, 3701 TD  ZEIST"
+    "address": "Krullelaan 28, 3701 TD  ZEIST",
+    "year": 1900,
+    "area": 514,
+    "BAG": "0355100000720341"
     },
     {
     "image_id": 32,
     "image_path": "/images/image32.png",
-    "address": "Wilhelminalaan 30, 3701 BL  ZEIST"
+    "address": "Wilhelminalaan 30, 3701 BL  ZEIST",
+    "year": 1900,
+    "area": 356,
+    "BAG": "0355100000720593"
     },
     {
     "image_id": 33,
     "image_path": "/images/image33.png",
-    "address": "Choisyweg 5, 3701 TA  ZEIST"
+    "address": "Choisyweg 5, 3701 TA  ZEIST",
+    "year": 1925,
+    "area": 162,
+    "BAG": "0355100000733566"
     },
     {
     "image_id": 34,
     "image_path": "/images/image34.png",
-    "address": "De Vuursche 1, 3452 JT  VLEUTEN"
+    "address": "De Vuursche 1, 3452 JT  VLEUTEN",
+    "year": 2009,
+    "area": 290,
+    "BAG": "0344100000052386"
     },
     {
     "image_id": 35,
     "image_path": "/images/image35.png",
-    "address": "De Vuursche 16, 3452 JT  VLEUTEN"
+    "address": "De Vuursche 16, 3452 JT  VLEUTEN",
+    "year": 2006,
+    "area": 120,
+    "BAG": "0344100000065790"
     },
     {
     "image_id": 36,
     "image_path": "/images/image36.png",
-    "address": "De Vuursche 46, 3452 JT  VLEUTEN"
+    "address": "De Vuursche 46, 3452 JT  VLEUTEN",
+    "year": 2006,
+    "area": 115,
+    "BAG": "0344100000064930"
     },
     {
     "image_id": 37,
     "image_path": "/images/image37.png",
-    "address": "De Vuursche 72, 3452 JT  VLEUTEN"
+    "address": "De Vuursche 72, 3452 JT  VLEUTEN",
+    "year": 2006,
+    "area": 113,
+    "BAG": "0344100000074040"
     },
     {
     "image_id": 38,
     "image_path": "/images/image38.png",
-    "address": "Utrechtse Heuvelrug 68, 3452 JA  VLEUTEN"
+    "address": "Utrechtse Heuvelrug 68, 3452 JA  VLEUTEN",
+    "year": 2006,
+    "area": 98,
+    "BAG": "0344100000067207"
     },
     {
     "image_id": 39,
     "image_path": "/images/image39.png",
-    "address": "Zilverschoonlaan 79, 3452 AA  VLEUTEN"
+    "address": "Zilverschoonlaan 79, 3452 AA  VLEUTEN",
+    "year": 2005,
+    "area": 229,
+    "BAG": "0344100000021221"
     },
     {
     "image_id": 40,
     "image_path": "/images/image40.png",
-    "address": "Schoolstraat 29, 3451 AA  VLEUTEN"
+    "address": "Schoolstraat 29, 3451 AA  VLEUTEN",
+    "year": 1934,
+    "area": 123,
+    "BAG": "0344100000072153"
     }
 ]
