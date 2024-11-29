@@ -6,7 +6,9 @@ document.getElementById("send-image").addEventListener("click", async () => {
     reader.onloadend = async () => {
       const base64Image = reader.result.split(",")[1]; // Get base64 part
       const response = await sendImageToServer(base64Image);
-      console.log(response);
+      if (response) {
+        displayResponse(response);
+      }
     };
     reader.readAsDataURL(file);
   } else {
@@ -31,4 +33,9 @@ async function sendImageToServer(base64Image) {
   } catch (error) {
     console.error("Error sending image to server:", error);
   }
+}
+
+function displayResponse(response) {
+  document.getElementById("area").innerText = `Area: ${response[0]}`;
+  document.getElementById("year").innerText = `Year: ${response[1]}`;
 }

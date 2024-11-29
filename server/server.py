@@ -8,8 +8,6 @@ from io import BytesIO
 
 import os
 import tensorflow as tf
-from tensorflow.keras import layers, models
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 
 HOST = "0.0.0.0"
@@ -23,14 +21,6 @@ def load_and_predict(model_name, image):
     model = tf.keras.models.load_model(model_path)
     predictions = model.predict(image)
     return predictions.astype(int)  # Ensure the output is an integer
-
-def predict_year(image):
-    predictions = load_and_predict('model_year.h5', image)
-    return predictions
-
-def predict_opp(image):
-    predictions = load_and_predict('model_opp.h5', image)
-    return predictions
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -72,10 +62,10 @@ class Handler(BaseHTTPRequestHandler):
         image_array = np.expand_dims(image_array, axis=0)  # Add batch dimension
 
         # Predict using the models
-        opp = load_and_predict('model_opp.h5', image_array)
+        area = load_and_predict('model_area.h5', image_array)
         year = load_and_predict('model_year.h5', image_array)
 
-        return [int(opp[0][0]), int(year[0][0])]
+        return [int(area[0][0]), int(year[0][0])]
 
     def _prepare_json_response(self, response: List[Any]) -> bytes:
         self.send_response(200)

@@ -9,15 +9,39 @@
   --font-size: 16px;
   --padding: 10px;
   --border-radius: 4px;
+  --transition-duration: 0.3s;
 }
 
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-duration);
+}
+
+a:hover {
+  color: var(--focus-color);
 }
 
 .rss-item {
   margin-bottom: 20px;
+  padding: var(--padding);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: white;
 }
 
 .rss-item h2 {
@@ -28,9 +52,10 @@ body {
   margin: 5px 0;
 }
 
-/* Select Input Styles */
-#language-select,
-#custom-language-input {
+/* Input Styles */
+input[type="file"],
+textarea {
+  width: 100%;
   padding: var(--padding);
   font-size: var(--font-size);
   border: 1px solid var(--border-color);
@@ -38,17 +63,14 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color var(--transition-duration), box-shadow var(--transition-duration);
+  margin-bottom: 10px;
 }
 
-#language-select:focus,
-#custom-language-input:focus {
+input[type="file"]:focus,
+textarea:focus {
   border-color: var(--focus-color);
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-#language-select option {
-  padding: var(--padding);
 }
 
 /* Button Styles */
@@ -63,6 +85,15 @@ body {
   font-size: var(--font-size);
   margin: 4px 2px;
   cursor: pointer;
+  transition: background-color var(--transition-duration);
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+#send-image {
+  background-color: var(--primary-color);
 }
 
 #fetch-feed {
@@ -100,6 +131,8 @@ body {
   height: 25px;
   width: 25px;
   background-color: #eee;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-duration);
 }
 
 .container:hover input ~ .checkmark {
@@ -128,4 +161,16 @@ body {
   border: solid white;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .button {
+    width: 100%;
+    padding: var(--padding);
+  }
 }
