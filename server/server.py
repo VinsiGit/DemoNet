@@ -6,11 +6,31 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 
-from aiFunctions import load_and_predict
+import os
+import tensorflow as tf
+from tensorflow.keras import layers, models
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+
 
 HOST = "0.0.0.0"
 PORT = 9090
+MODEL_SAVE_DIR = './models'
+TARGET_SIZE = (256, 256)
 
+
+def load_and_predict(model_name, image):
+    model_path = os.path.join(MODEL_SAVE_DIR, model_name)
+    model = tf.keras.models.load_model(model_path)
+    predictions = model.predict(image)
+    return predictions.astype(int)  # Ensure the output is an integer
+
+def predict_year(image):
+    predictions = load_and_predict('model_year.h5', image)
+    return predictions
+
+def predict_opp(image):
+    predictions = load_and_predict('model_opp.h5', image)
+    return predictions
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -21,16 +41,17 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(b"")  # Send an empty response body
 
     def do_POST(self):
-        # read incoming sent data
-        data = self.rfile.read(self._sent_data_size)
+        # Read incoming sent data
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        
+        # Process the image data
+        processed_data = self._process(post_data.decode("utf-8"))
 
-        # process the image data
-        processed_data = self._process(data.decode("utf-8"))
-
-        # prepare the (json) response
+        # Prepare the (json) response
         jsonbytes = self._prepare_json_response(processed_data)
 
-        # send the (json) response back ...
+        # Send the (json) response back
         self.wfile.write(jsonbytes)
 
     def do_OPTIONS(self):
@@ -45,14 +66,14 @@ class Handler(BaseHTTPRequestHandler):
         image_data = data_dict.get("image")
 
         # Decode the base64 image data
-        image = Image.open(BytesIO(base64.b64decode(image_data)))
-        image = image.resize((224, 224))  # Resize image to the expected input size
+        image = Image.open(BytesIO(base64.b64decode(image_data))).convert('RGB')
+        image = image.resize(TARGET_SIZE)  # Resize image to the expected input size
         image_array = np.array(image) / 255.0  # Normalize the image
         image_array = np.expand_dims(image_array, axis=0)  # Add batch dimension
 
         # Predict using the models
-        opp = load_and_predict('path_to_save_model_opp.h5', image_array)
-        year = load_and_predict('path_to_save_model_year.h5', image_array)
+        opp = load_and_predict('model_opp.h5', image_array)
+        year = load_and_predict('model_year.h5', image_array)
 
         return [int(opp[0][0]), int(year[0][0])]
 
@@ -64,19 +85,11 @@ class Handler(BaseHTTPRequestHandler):
         jsonstr = json.dumps(response, indent=4)
         return jsonstr.encode("utf-8")  # Encode to bytes
 
-    @property
-    def _sent_data_size(self) -> int:
-        return int(self.headers.get("Content-Length"))
-
-
 server = HTTPServer((HOST, PORT), Handler)
 
-
-
-
 def main():
+    print(f"Starting server at http://{HOST}:{PORT}")
     server.serve_forever()
-
 
 if __name__ == "__main__":
     main()

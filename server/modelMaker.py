@@ -1,10 +1,13 @@
 import os
+import json
+import numpy as np
 import tensorflow as tf
 from tensorflow.keras import layers, models
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 # Directory to save models
 MODEL_SAVE_DIR = './models'
-
+TARGET_SIZE = (256, 256)
 # Ensure the directory exists
 os.makedirs(MODEL_SAVE_DIR, exist_ok=True)
 
@@ -32,6 +35,31 @@ def create_variable_size_cnn():
     
     return model
 
+def load_data(json_path):
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+    
+    images = []
+    years = []
+    opps = []
+    
+    for item in data:
+        image_path = item['image_path']
+        year = item['jaar']
+        opp = item['opp']
+
+        image = load_img('./data'+image_path, target_size=TARGET_SIZE)  # Resize to a fixed size
+        image = img_to_array(image)
+        images.append(image)
+        
+        years.append(year)
+        opps.append(opp)
+    
+    images = np.array(images)
+    years = np.array(years)
+    opps = np.array(opps)
+    
+    return images, years, opps
 
 def train_model(train_data, train_labels, model_name):
     model = create_variable_size_cnn()
@@ -43,27 +71,10 @@ def train_model(train_data, train_labels, model_name):
     model.save(model_save_path)
     print(f"Model saved to {model_save_path}")
 
+def main():
+    images, years, opps = load_data('./data/data.json')
+    train_model(images, years, 'model_year.h5')
+    train_model(images, opps, 'model_opp.h5')
 
-def load_and_predict(model_name, data):
-    model_path = os.path.join(MODEL_SAVE_DIR, model_name)
-    model = tf.keras.models.load_model(model_path)
-    predictions = model.predict(data)
-    return predictions.astype(int)  # Ensure the output is an integer
-
-
-# Example usage:
-# train_data and train_labels should be your training dataset and labels
-# train_model(train_data, train_labels, 'model_opp.h5')
-# train_model(train_data, train_labels, 'model_year.h5')
-
-# To load and predict
-# predictions = load_and_predict('model_opp.h5', test_data)
-# predictions = load_and_predict('model_year.h5', test_data)
-
-def predict_year(image):
-    predictions = load_and_predict('model_year.h5', image)
-    return predictions
-
-def predict_opp(image):
-    predictions = load_and_predict('model_opp.h5', image)
-    return predictions
+if __name__ == "__main__":
+    main()
