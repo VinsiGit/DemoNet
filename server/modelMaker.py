@@ -27,33 +27,30 @@ def create_improved_cnn():
     # Convolutional Layers
     model.add(layers.Conv2D(32, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.01)))
     model.add(layers.BatchNormalization())
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Dropout(0.25))
+    model.add(layers.MaxPooling2D())
     
     model.add(layers.Conv2D(64, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.01)))
     model.add(layers.BatchNormalization())
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Dropout(0.25))
+    model.add(layers.MaxPooling2D())
     
     model.add(layers.Conv2D(128, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.01)))
     model.add(layers.BatchNormalization())
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Dropout(0.25))
+    model.add(layers.MaxPooling2D())
     
     model.add(layers.Conv2D(256, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.01)))
     model.add(layers.BatchNormalization())
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Dropout(0.25))
+    model.add(layers.MaxPooling2D())
     
     # Global Average Pooling to reduce variable size feature maps to a fixed vector
     model.add(layers.GlobalAveragePooling2D())
-    
+    model.add(layers.Flatten()),
+
     model.add(layers.Dense(512, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
     model.add(layers.BatchNormalization())
-    model.add(layers.Dropout(0.5))
+    model.add(layers.Dropout(0.1))
     
     # Output Layer: Produces a single integer
-    model.add(layers.Dense(1, activation='linear'))  # Use sigmoid or relu as needed
+    model.add(layers.Dense(1, activation='relu'))  # Use sigmoid or relu as needed
     
     return model
 
@@ -136,6 +133,7 @@ def main():
     val_dataset_area = prepare_dataset(val_df, base_path="./data", label_column="area", scaler=area_scaler, is_training=False)
 
     # Train models
+    
     train_model(train_dataset_year, val_dataset_year, 'model_year.h5', year_scaler)
     train_model(train_dataset_area, val_dataset_area, 'model_area.h5', area_scaler)
 

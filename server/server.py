@@ -74,8 +74,8 @@ class Handler(BaseHTTPRequestHandler):
         # Predict using the models
         # area = load_and_predict('model_area.h5', image_array)
         # year = load_and_predict('model_year.h5', image_array)
-        year_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, 'year_scaler.pkl'))
-        area_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, 'area_scaler.pkl'))
+        area_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, "area_scaler.pkl"))
+        year_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, "year_scaler.pkl"))
 
         area = predict_and_denormalize("model_area.h5", image_array, area_scaler)
         year = predict_and_denormalize("model_year.h5", image_array, year_scaler)
