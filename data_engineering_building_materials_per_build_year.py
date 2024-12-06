@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+from psycopg2 import connect
+from dotenv import load_dotenv
+import os
 
 file_path = "source-data/material_inventory_dataset_1.0.1.ods"
 sheet_name = "data_building_part"
@@ -57,14 +60,72 @@ interpolated_data.fillna(method='bfill', inplace=True)
 
 interpolated_data = interpolated_data.apply(pd.to_numeric, errors='coerce')
 
-interpolated_data = interpolated_data.applymap(lambda x: 0 if abs(x) < 1e-7 else round(x, 6))
+interpolated_data = interpolated_data.map(lambda x: 0 if abs(x) < 1e-7 else round(x, 6))
 
 # Add the current index as a new column named 'year'
-interpolated_data['year'] = interpolated_data.index
+interpolated_data['build_year'] = interpolated_data.index
 
 # Reset the index and assign a new one
 interpolated_data = interpolated_data.reset_index(drop=True)
 
-# Print the DataFrame to check changes
-print(interpolated_data)
 print(interpolated_data.columns)
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Fetch database connection parameters
+db_host = "localhost"
+db_port = 15432
+db_name = "demo_db"
+db_user = os.getenv('POSTGRES_USER')
+db_password = os.getenv('POSTGRES_PASSWORD')
+
+# Connect to the PostgreSQL database
+connection = connect(
+    host=db_host,
+    port=db_port,
+    database=db_name,
+    user=db_user,
+    password=db_password
+)
+
+cursor = connection.cursor()
+
+# Insert the interpolated data into the database
+for index, row in interpolated_data.iterrows():
+    insert_query = """
+    INSERT INTO materials (
+        build_year, aconcrete_s, bitumen, brick, concrete, expclay_s, minwool_l, 
+        mortar, plasterboard, polystyrene, woodchip, woodfiber_s, aluminium, 
+        glass, mdf
+    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (build_year) DO NOTHING;
+    """
+
+    # Convert all columns except 'build_year' to float before inserting
+    cursor.execute(insert_query, (
+        int(row['build_year']),
+        float(row.get('aconcrete_s', 0)),
+        float(row.get('bitumen', 0)),
+        float(row.get('brick', 0)),
+        float(row.get('concrete', 0)),
+        float(row.get('expclay_s', 0)),
+        float(row.get('minwool_l', 0)),
+        float(row.get('mortar', 0)),
+        float(row.get('plasterboard', 0)),
+        float(row.get('polystyrene', 0)),
+        float(row.get('woodchip', 0)),
+        float(row.get('woodfiber_s', 0)),
+        float(row.get('aluminium', 0)),
+        float(row.get('glass', 0)),
+        float(row.get('mdf', 0))
+    ))
+
+# Commit the transaction
+connection.commit()
+
+# Close the cursor and connection
+cursor.close()
+connection.close()
+
+print("Data successfully inserted into the database.")
