@@ -60,7 +60,7 @@ interpolated_data.fillna(method='bfill', inplace=True)
 
 interpolated_data = interpolated_data.apply(pd.to_numeric, errors='coerce')
 
-interpolated_data = interpolated_data.map(lambda x: 0 if abs(x) < 1e-7 else round(x, 6))
+interpolated_data = interpolated_data.applymap(lambda x: 0 if abs(x) < 1e-7 else round(x, 6))
 
 # Add the current index as a new column named 'year'
 interpolated_data['build_year'] = interpolated_data.index
