@@ -5,6 +5,7 @@ import base64
 import numpy as np
 from PIL import Image
 from io import BytesIO
+import joblib
 
 import os
 import tensorflow as tf
@@ -12,8 +13,17 @@ import tensorflow as tf
 
 HOST = "0.0.0.0"
 PORT = 9090
-MODEL_SAVE_DIR = './models'
+MODEL_SAVE_DIR = "./models"
+SCALER_SAVE_DIR = "./scalers"
 TARGET_SIZE = (256, 256)
+
+
+def predict_and_denormalize(model_name, image, scaler):
+    model_path = os.path.join(MODEL_SAVE_DIR, model_name)
+    model = tf.keras.models.load_model(model_path)
+    prediction = model.predict(image)
+    denormalized_prediction = scaler.inverse_transform(prediction)
+    return denormalized_prediction[0][0]
 
 
 def load_and_predict(model_name, image):
@@ -34,7 +44,7 @@ class Handler(BaseHTTPRequestHandler):
         # Read incoming sent data
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
-        
+
         # Process the image data
         processed_data = self._process(post_data.decode("utf-8"))
 
@@ -62,10 +72,16 @@ class Handler(BaseHTTPRequestHandler):
         image_array = np.expand_dims(image_array, axis=0)  # Add batch dimension
 
         # Predict using the models
-        area = load_and_predict('model_area.h5', image_array)
-        year = load_and_predict('model_year.h5', image_array)
+        # area = load_and_predict('model_area.h5', image_array)
+        # year = load_and_predict('model_year.h5', image_array)
+        year_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, 'year_scaler.pkl'))
+        area_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, 'area_scaler.pkl'))
 
-        return [int(area[0][0]), int(year[0][0])]
+        area = predict_and_denormalize("model_area.h5", image_array, area_scaler)
+        year = predict_and_denormalize("model_year.h5", image_array, year_scaler)
+        print(area)
+        print(year)
+        return [int(area), int(year)]
 
     def _prepare_json_response(self, response: List[Any]) -> bytes:
         self.send_response(200)
