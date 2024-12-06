@@ -50,7 +50,7 @@ def create_improved_cnn():
     model.add(layers.Dropout(0.1))
     
     # Output Layer: Produces a single integer
-    model.add(layers.Dense(1, activation='relu'))  # Use sigmoid or relu as needed
+    model.add(layers.Dense(1, activation='linear'))  # Use sigmoid or relu as needed
     
     return model
 
