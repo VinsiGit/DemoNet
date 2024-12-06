@@ -2,13 +2,15 @@ services:
   database:
     image: postgres:latest
     ports:
-      - 15432:5432
+      - "15432:5432"
     env_file:
       - .env
     networks:
       - postgres-network
     volumes:
       - ./db-data:/var/lib/postgresql/data
+      - ./db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4

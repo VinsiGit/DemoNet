@@ -59,4 +59,12 @@ interpolated_data = interpolated_data.apply(pd.to_numeric, errors='coerce')
 
 interpolated_data = interpolated_data.applymap(lambda x: 0 if abs(x) < 1e-7 else round(x, 6))
 
+# Add the current index as a new column named 'year'
+interpolated_data['year'] = interpolated_data.index
+
+# Reset the index and assign a new one
+interpolated_data = interpolated_data.reset_index(drop=True)
+
+# Print the DataFrame to check changes
 print(interpolated_data)
+print(interpolated_data.columns)
