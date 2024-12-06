@@ -9,6 +9,7 @@ import joblib
 
 import os
 import tensorflow as tf
+from material_calculator import get_materials_by_year_and_area
 
 
 HOST = "0.0.0.0"
@@ -77,11 +78,17 @@ class Handler(BaseHTTPRequestHandler):
         area_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, "area_scaler.pkl"))
         year_scaler = joblib.load(os.path.join(SCALER_SAVE_DIR, "year_scaler.pkl"))
 
-        area = predict_and_denormalize("model_area.h5", image_array, area_scaler)
-        year = predict_and_denormalize("model_year.h5", image_array, year_scaler)
+        area = int(predict_and_denormalize("model_area.h5", image_array, area_scaler))
+        year = int(predict_and_denormalize("model_year.h5", image_array, year_scaler))
         print(area)
         print(year)
-        return [int(area), int(year)]
+
+        materials = get_materials_by_year_and_area(year, area)
+        print(f"Materials for year {year} and surface area {area}m²:")
+        for material, amount in materials.items():
+            print(f"{material}: {amount*area}")
+
+        return [int(area), int(year),material, int(amount)]
 
     def _prepare_json_response(self, response: List[Any]) -> bytes:
         self.send_response(200)
