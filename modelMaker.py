@@ -50,7 +50,7 @@ def create_improved_cnn():
     model.add(layers.Dropout(0.1))
     
     # Output Layer: Produces a single integer
-    model.add(layers.Dense(1, activation='linear'))  # Use sigmoid or relu as needed
+    model.add(layers.Dense(1, activation="sigmoid"))  # Use sigmoid or relu as needed
     
     return model
 
@@ -114,7 +114,12 @@ def main():
     # Normalize the labels
     year_scaler = MinMaxScaler()
     area_scaler = MinMaxScaler()
+    print("Year main")
+    print(df['year'])
+
     df['year'] = year_scaler.fit_transform(df[['year']])
+    print("Year scaled")
+    print(df['year'])
     df['area'] = area_scaler.fit_transform(df[['area']])
 
     # Save the scalers
@@ -135,7 +140,7 @@ def main():
     # Train models
     
     train_model(train_dataset_year, val_dataset_year, 'model_year.h5', year_scaler)
-    train_model(train_dataset_area, val_dataset_area, 'model_area.h5', area_scaler)
+    # train_model(train_dataset_area, val_dataset_area, 'model_area.h5', area_scaler)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,9 @@ def predict_and_denormalize(model_name, image, scaler):
     model_path = os.path.join(MODEL_SAVE_DIR, model_name)
     model = tf.keras.models.load_model(model_path)
     prediction = model.predict(image)
+    print(f"Prediction: {prediction}")
     denormalized_prediction = scaler.inverse_transform(prediction)
+    print(f"Denormalized prediction: {denormalized_prediction[0][0]}")
     return denormalized_prediction[0][0]
 
 
@@ -80,15 +82,20 @@ class Handler(BaseHTTPRequestHandler):
 
         area = int(predict_and_denormalize("model_area.h5", image_array, area_scaler))
         year = int(predict_and_denormalize("model_year.h5", image_array, year_scaler))
+        print("Area and year")
         print(area)
         print(year)
-
+        
+        if year < 1953:
+            return "the year is too old to get accurate material data"
+        elif year < 1963:
+            year = 1963        
         materials = get_materials_by_year_and_area(year, area)
         print(f"Materials for year {year} and surface area {area}m²:")
         for material, amount in materials.items():
-            print(f"{material}: {amount*area}")
+            print(f"{material}: {amount*area} kg")
 
-        return [int(area), int(year),material, int(amount)]
+        return [int(area), int(year), materials]
 
     def _prepare_json_response(self, response: List[Any]) -> bytes:
         self.send_response(200)
