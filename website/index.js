@@ -16,6 +16,19 @@ document.getElementById("send-image").addEventListener("click", async () => {
   }
 });
 
+document.getElementById('image-input').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.getElementById('image-preview');
+            img.src = e.target.result;
+            img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 async function sendImageToServer(base64Image) {
   try {
     const response = await fetch("http://localhost:9090", {
@@ -36,10 +49,22 @@ async function sendImageToServer(base64Image) {
 }
 
 function displayResponse(response) {
-  document.getElementById("area").innerText = `Area: ${response[0]}`;
-  document.getElementById("year").innerText = `Year: ${response[1]}`;
-  document.getElementById("material").innerText = `Material: ${response[2]}`;
-  document.getElementById("amount").innerText = `Amount: ${response[3]}`;
-    document.getElementById("stuff").innerText = `Stuff: ${response[3] * response[0]}`;
+    if (response === "the year is too old to get accurate material data") {
+        document.getElementById("infoBuilding").innerHTML = "The year is too old to get accurate material data.";
+        document.getElementById("infoMaterial").innerHTML = "No data available.";
+        return;
+    }
+    const [area, year, materials] = response;
 
+    let infoBuilding = `Estimated to be built in ${year} and has a Estimated surface area of ${area} m²`;
+    let infoMaterial = "<h3>Materials:</h3><table><thead><tr><th>Material</th><th>Amount (kg)</th></tr></thead><tbody>";
+    for (let material in materials) {
+        let amount = (materials[material] * area).toFixed(2);
+        amount = parseFloat(amount).toLocaleString('de-DE');
+        infoMaterial += `<tr><td><strong>${material}</strong></td><td>${amount}</td></tr>`;
+    }
+    infoMaterial += "</tbody></table>";
+
+    document.getElementById("infoBuilding").innerHTML = infoBuilding;
+    document.getElementById("infoMaterial").innerHTML = infoMaterial;
 }
