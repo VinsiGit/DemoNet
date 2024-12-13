@@ -42,6 +42,7 @@ async function sendImageToServer(base64Image) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
+    console.log("Response from server:", data);
     return data;
   } catch (error) {
     console.error("Error sending image to server:", error);
